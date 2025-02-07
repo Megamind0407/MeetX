@@ -12,14 +12,14 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!isLoaded || !user) return;
-
+  
     const setupClient = async () => {
       console.log("Fetching token for user:", user.id);
-
+  
       try {
         const token = await streamTokenProvider();
         console.log("Received Token:", token);
-
+  
         const client = new StreamVideoClient({
           apiKey: process.env.NEXT_PUBLIC_STREAM_API_KEY!,
           user: {
@@ -29,14 +29,13 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
           },
           token,
         });
-
-        console.log("Stream Client initialized successfully");
+        console.log("Stream Client initialized successfully:", client);
         setStreamVideoClient(client);
       } catch (error) {
         console.error("Error initializing Stream client:", error);
       }
     };
-
+  
     setupClient();
   }, [user, isLoaded]);
 
