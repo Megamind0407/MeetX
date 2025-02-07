@@ -78,7 +78,7 @@ export const CODING_QUESTIONS: CodeQuestion[] = [
         starterCode: {
             javascript: `function twoSum(nums, target) {
   // Write your solution here
-  
+
 }`,
             python: `def two_sum(nums, target):
     # Write your solution here
@@ -86,8 +86,14 @@ export const CODING_QUESTIONS: CodeQuestion[] = [
             java: `class Solution {
     public int[] twoSum(int[] nums, int target) {
         // Write your solution here
-        
     }
+}`,
+            cpp: `class Solution{
+            public: 
+            int twoSum(int x){
+             // Write your solution here
+            }
+
 }`,
         },
         constraints: [
@@ -126,6 +132,13 @@ export const CODING_QUESTIONS: CodeQuestion[] = [
         
     }
 }`,
+cpp: `class Solution{
+    public: 
+    void reverseString(vector<char>& s){
+     // Write your solution here
+    }
+
+}`
         },
     },
     {
@@ -160,6 +173,14 @@ export const CODING_QUESTIONS: CodeQuestion[] = [
         
     }
 }`,
+cpp: `class Solution{
+    public: 
+    bool isPalindrome(int x){
+     // Write your solution here
+    }
+
+}`
+
         },
     },
 ];
@@ -168,6 +189,7 @@ export const LANGUAGES = [
     { id: "javascript", name: "JavaScript", icon: "/javascript.png" },
     { id: "python", name: "Python", icon: "/python.png" },
     { id: "java", name: "Java", icon: "/java.png" },
+    { id: "cpp", name: "Cpp", icon: "/cpp.png" },
 ] as const;
 
 export interface CodeQuestion {
@@ -183,6 +205,7 @@ export interface CodeQuestion {
         javascript: string;
         python: string;
         java: string;
+        cpp: string;
     };
     constraints?: string[];
 }
