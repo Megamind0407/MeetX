@@ -12,11 +12,10 @@ export const streamTokenProvider = async () => {
 
   try {
     const streamClient = new StreamClient(
-      process.env.STREAM_API_KEY!, // Secret key should only be server-side
+      process.env.STREAM_API_KEY!, 
       process.env.STREAM_SECRET_KEY!
     );
 
-    // Ensure the Stream client is successfully initialized
     const token = streamClient.generateUserToken({ user_id: user.id });
 
     return token;
