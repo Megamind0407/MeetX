@@ -14,12 +14,8 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     if (!isLoaded || !user) return;
   
     const setupClient = async () => {
-      console.log("Fetching token for user:", user.id);
-  
       try {
         const token = await streamTokenProvider();
-        console.log("Received Token:", token);
-  
         const client = new StreamVideoClient({
           apiKey: process.env.NEXT_PUBLIC_STREAM_API_KEY!,
           user: {

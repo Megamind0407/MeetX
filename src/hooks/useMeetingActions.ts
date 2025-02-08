@@ -14,19 +14,8 @@ const useMeetingActions = () => {
     }
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       const id = crypto.randomUUID();
-      console.log("Meeting ID:", id);
 
-      // Validate WebSocket URL
-      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "wss://video.stream-io-api.com";
-      if (!wsUrl) {
-        console.error("WebSocket URL is not defined in environment variables");
-        toast.error("WebSocket connection error: Missing WebSocket URL");
-        return;
-      }
-
-      // Establish the call connection
       const call = client.call("default", id);
       const response = await call.getOrCreate({
         data: {
@@ -40,30 +29,13 @@ const useMeetingActions = () => {
       toast.success("Meeting Created");
 
     } catch (error: any) {
-      console.error("Meeting creation error:", error);
-
-      // Improved error handling
-      if (error.isWSFailure) {
-        console.error(`WebSocket Connection failed: ${error.message}`);
-        toast.error(`WebSocket Connection failed: ${error.message}`);
-      } else if (error.code === "JWTAuth") {
-        console.error(`Authentication failed: ${error.message}`);
-        toast.error(`Authentication failed: ${error.message}`);
-      } else if (error.response?.status === 403) {
-        console.error("Unauthorized: Invalid API Key or Token");
-        toast.error("Unauthorized: Invalid API Key or Token");
-      } else {
-        console.error(`Failed to create meeting: ${error.message || error}`);
-        toast.error(`Failed to create meeting: ${error.message || error}`);
-      }
+      console.error(error);
+      toast.error("Failed to create meeting");
     }
   };
 
   const joinMeeting = (callId: string) => {
-    if (!client) {
-      toast.error("Failed to join meeting: Client not initialized");
-      return;
-    }
+    if (!client) return toast.error("Failed to join meeting. Please try again.");
     router.push(`/meeting/${callId}`);
   };
 
